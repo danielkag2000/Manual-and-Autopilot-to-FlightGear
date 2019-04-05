@@ -17,8 +17,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Padding="3" Margin="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">hi</TextBox>
-        <Button Grid.Column="0" Grid.Row="1" Click="btnStart_Click" Margin="5" Padding="5" HorizontalAlignment="Right">OK</Button>
-        <Button Grid.Column="1" Grid.Row="1" Click="btnStart_Click" Margin="5" Padding="5" HorizontalAlignment="Left">Clear</Button>
+        <TextBox Padding="3" Margin="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"></TextBox>
+        <Button Grid.Column="0" Grid.Row="1" Margin="5" Padding="5" HorizontalAlignment="Right">OK</Button>
+        <Button Grid.Column="1" Grid.Row="1" Margin="5" Padding="5" HorizontalAlignment="Left">Clear</Button>
     </Grid>
 </Window>
