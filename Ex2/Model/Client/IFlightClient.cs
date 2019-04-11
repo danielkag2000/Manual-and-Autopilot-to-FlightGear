@@ -9,7 +9,7 @@ namespace Ex2.Model.Client
     interface IFlightClient
     {
         string IP { get; set; }
-        string Port { get; set; }
+        uint Port { get; set; }
 
         bool IsOpen { get; }
 
