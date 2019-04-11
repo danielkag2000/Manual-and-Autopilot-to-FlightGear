@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex2", "Ex2.csproj", "{422F6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightSimulator", "..\FlightSimulator\FlightSimulator\FlightSimulator.csproj", "{F770CF43-0E3D-4E5B-B8EB-F260C62EC543}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPilot", "..\AutoPilot\AutoPilot.csproj", "{8A86C20C-B600-47D6-B039-41546B9272DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoPilot", "..\AutoPilot\AutoPilot.csproj", "{BF81E361-129B-448D-8B7A-F58901DC64E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{F770CF43-0E3D-4E5B-B8EB-F260C62EC543}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F770CF43-0E3D-4E5B-B8EB-F260C62EC543}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F770CF43-0E3D-4E5B-B8EB-F260C62EC543}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8A86C20C-B600-47D6-B039-41546B9272DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A86C20C-B600-47D6-B039-41546B9272DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A86C20C-B600-47D6-B039-41546B9272DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A86C20C-B600-47D6-B039-41546B9272DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF81E361-129B-448D-8B7A-F58901DC64E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF81E361-129B-448D-8B7A-F58901DC64E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF81E361-129B-448D-8B7A-F58901DC64E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF81E361-129B-448D-8B7A-F58901DC64E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -98,10 +98,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoPilot\AutoPilot.csproj">
-      <Project>{8a86c20c-b600-47d6-b039-41546b9272dc}</Project>
-      <Name>AutoPilot</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FlightSimulator\FlightSimulator\FlightSimulator.csproj">
       <Project>{f770cf43-0e3d-4e5b-b8eb-f260c62ec543}</Project>
       <Name>FlightSimulator</Name>
