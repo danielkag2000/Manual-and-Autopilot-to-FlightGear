@@ -58,6 +58,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\AutoPilotView.xaml.cs">
+      <DependentUpon>AutoPilotView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -70,6 +73,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AutoPilotView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Client\FlightClient.cs" />
@@ -100,14 +107,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoPilot\AutoPilot.csproj">
-      <Project>{8a86c20c-b600-47d6-b039-41546b9272dc}</Project>
-      <Name>AutoPilot</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FlightSimulator\FlightSimulator\FlightSimulator.csproj">
       <Project>{f770cf43-0e3d-4e5b-b8eb-f260c62ec543}</Project>
       <Name>FlightSimulator</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
