@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Ex2.Model.Server
 {
-    interface IFlightServer : INotifyPropertyChanged
+    delegate void UpdateHandler();
+
+    interface IVariablesServer
     {
         uint Port { get; set; }
+        uint RefreshRate { get; set; }
 
         bool IsOpen { get; }
 
-        double Lon { get; }
-        double Lat { get; }
+        IList<string> PropertyNames { set; get; }
+        double this[string propertyName] { get; }
+
+        event UpdateHandler PropertyUpdate;
 
         void Open();
         void Close();
