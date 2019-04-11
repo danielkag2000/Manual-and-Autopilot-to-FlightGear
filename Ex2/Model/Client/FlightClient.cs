@@ -23,7 +23,7 @@ namespace Ex2.Model.Client
 
                 // only set valid ip address
                 if (!IPAddress.TryParse(value, out ip))
-                    throw new ArgumentException("Invalid IP inserted.");
+                    throw new ArgumentException($"Invalid IP inserted ({value}).");
             }
         }
 
@@ -40,7 +40,7 @@ namespace Ex2.Model.Client
                 if (value < 65536)
                     this.port = (int) value;
                 else
-                    throw new ArgumentException("Invalid port inserted.");
+                    throw new ArgumentException($"Invalid port inserted({value}).");
             }
         }
 
