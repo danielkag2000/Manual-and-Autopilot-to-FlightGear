@@ -1,4 +1,4 @@
-﻿<Window x:Class="Ex2.View.AutoPilotView"
+﻿<UserControl x:Class="Ex2.View.AutoPilotView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:Ex2.View"
         mc:Ignorable="d"
         Title="AutoPilotView" Height="450" Width="800">
+
+    <UserControl.Resources>
+        <local:TextToBackgroundConverter x:Key="textToBackgroundConverter"></local:TextToBackgroundConverter>
+    </UserControl.Resources>
     <Grid TextBlock.FontSize="20" Margin="4">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -16,8 +20,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Padding="3" Margin="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap"></TextBox>
+        <TextBox Padding="3" Margin="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Background="{Binding Path=Text, Converter={StaticResource textToBackgroundConverter}}"></TextBox>
         <Button Grid.Column="0" Grid.Row="1" Margin="5" Padding="5" HorizontalAlignment="Right">OK</Button>
         <Button Grid.Column="1" Grid.Row="1" Margin="5" Padding="5" HorizontalAlignment="Left">Clear</Button>
     </Grid>
-</Window>
+</UserControl>
