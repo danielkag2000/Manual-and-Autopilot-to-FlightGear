@@ -12,18 +12,26 @@ namespace Ex2.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private IFlightClient Model;
-
-        public AutoPilotVM(IFlightClient model)
+        //private IFlightClient Model;
+        private string text;
+        public string TextCommand
         {
-            this.Model = model;
+            get { return text; }
+            set {
+                text = value;
+                NotifyPropertyChanged("TextCommand");
+            }
+        }
+
+        public AutoPilotVM()
+        {
+            //this.Model = model;
         }
 
 
         public void NotifyPropertyChanged(string propName)
         {
-            if (this.PropertyChanged != null)
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

@@ -16,7 +16,6 @@ namespace Ex2.View
         {
             if (targetType != typeof(Brush))
                 throw new InvalidOperationException("Must convert to a brush!");
-            decimal price = (decimal)value;
             string text = (string)value;
             return String.IsNullOrEmpty(text) ? Brushes.White : Brushes.LightPink;
         }
