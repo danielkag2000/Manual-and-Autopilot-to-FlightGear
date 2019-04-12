@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ex2.Model.Client
+namespace Ex2.Model.Server
 {
-    interface IFlightClient
+    interface IFlightServer : INotifyPropertyChanged
     {
-        string IP { get; set; }
         uint Port { get; set; }
 
         bool IsOpen { get; }
 
+        double Lon { get; }
+        double Lat { get; }
+
         void Open();
         void Close();
-
-        void SendLine(string line);
-        void SendLines(IList<string> lines);
     }
 }
