@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ex2.Model.Client
 {
-    interface IFlightClient
+    public interface IFlightClient
     {
         string IP { get; set; }
         uint Port { get; set; }

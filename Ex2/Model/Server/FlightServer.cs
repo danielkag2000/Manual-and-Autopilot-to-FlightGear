@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Ex2.Model.Server
 {
 
-    class FlightServer : IFlightServer
+    public class FlightServer : IFlightServer
     {
         private const string LON_PATH = "/position/longitude-deg";
         private const string LAT_PATH = "/position/latitude-deg";

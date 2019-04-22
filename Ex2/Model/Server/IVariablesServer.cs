@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ex2.Model.Server
 {
-    delegate void UpdateHandler();
+    public delegate void UpdateHandler();
 
-    interface IVariablesServer
+    public interface IVariablesServer
     {
         uint Port { get; set; }
         uint RefreshRate { get; set; }

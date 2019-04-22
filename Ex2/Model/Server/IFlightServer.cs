@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ex2.Model.Server
 {
-    interface IFlightServer : INotifyPropertyChanged
+    public interface IFlightServer : INotifyPropertyChanged
     {
         uint Port { get; set; }
 
