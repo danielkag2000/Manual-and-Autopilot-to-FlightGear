@@ -59,6 +59,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\AutoPilotVM.cs" />
+    <Compile Include="ViewModels\CommandHandler.cs" />
     <Compile Include="View\AutoPilotView.xaml.cs">
       <DependentUpon>AutoPilotView.xaml</DependentUpon>
     </Compile>
@@ -114,8 +115,6 @@
       <Name>FlightSimulator</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Commands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

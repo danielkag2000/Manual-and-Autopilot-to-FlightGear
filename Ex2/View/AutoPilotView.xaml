@@ -23,6 +23,6 @@
 
         <TextBox Padding="3" Margin="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="{Binding TextCommand, UpdateSourceTrigger=PropertyChanged}" Background="{Binding Path=TextCommand, Converter={StaticResource textToBackgroundConverter}}"></TextBox>
         <Button x:Name="btnOK" Grid.Column="0" Grid.Row="1" Margin="5" Padding="5" HorizontalAlignment="Right">OK</Button>
-        <Button x:Name="btnClear" Grid.Column="1" Grid.Row="1" Margin="5" Padding="5" HorizontalAlignment="Left">Clear</Button>
+        <Button x:Name="btnClear" Command="{Binding ClearCommand}" Grid.Column="1" Grid.Row="1" Margin="5" Padding="5" HorizontalAlignment="Left">Clear</Button>
     </Grid>
 </UserControl>
