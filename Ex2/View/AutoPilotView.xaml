@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
-        <local:TextToBackgroundConverter x:Key="textToBackgroundConverter"></local:TextToBackgroundConverter>
+        <local:StateToBackgroundConverter x:Key="stateToBackgroundConverter"></local:StateToBackgroundConverter>
     </UserControl.Resources>
 
     <Grid>
@@ -21,8 +21,8 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Padding="3" Margin="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="{Binding TextCommand, UpdateSourceTrigger=PropertyChanged}" Background="{Binding Path=TextCommand, Converter={StaticResource textToBackgroundConverter}}"></TextBox>
-        <Button x:Name="btnOK" Grid.Column="0" Grid.Row="1" Margin="5" Padding="5" HorizontalAlignment="Right">OK</Button>
+        <TextBox Padding="3" Margin="3" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding TextCommand, UpdateSourceTrigger=PropertyChanged}" Background="{Binding Path=CurState, Converter={StaticResource stateToBackgroundConverter}}"></TextBox>
+        <Button x:Name="btnOK" Command="{Binding OKCommand}" Grid.Column="0" Grid.Row="1" Margin="5" Padding="5" HorizontalAlignment="Right">OK</Button>
         <Button x:Name="btnClear" Command="{Binding ClearCommand}" Grid.Column="1" Grid.Row="1" Margin="5" Padding="5" HorizontalAlignment="Left">Clear</Button>
     </Grid>
 </UserControl>
