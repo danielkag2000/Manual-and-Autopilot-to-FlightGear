@@ -14,7 +14,6 @@ namespace Code_Tests
     {
         static void Main(string[] args)
         {
-
             Program p = new Program();
 
             p.OpenServer();
@@ -27,7 +26,7 @@ namespace Code_Tests
             while (!(ln = Console.ReadLine()).Equals("s") && p.client.IsOpen)
             {
                 p.client.SendLine(ln);
-                //Console.WriteLine($"Lon: {p.server.Lon}, Lat: {p.server.Lat}");
+                Console.WriteLine($"Lon: {p.server.Lon}, Lat: {p.server.Lat}");
             }
 
             Console.WriteLine("Client Finished");

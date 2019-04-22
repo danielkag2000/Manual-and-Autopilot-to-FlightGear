@@ -14,11 +14,6 @@ namespace Ex2.Model.Server
 {
     public class VariablesServer : IVariablesServer
     {
-        private IDictionary<string, double> properties = new ConcurrentDictionary<string, double>();
-
-        public double this[string propertyName] => properties[propertyName];
-
-
         private int port;
         public uint Port
         {
@@ -37,19 +32,19 @@ namespace Ex2.Model.Server
 
         public bool IsOpen { get; private set; }
 
-        private IList<string> propNames = new List<string>();
-        public IList<string> PropertyNames
-        {
-            get => new List<string>(propNames);
+        public char LineSep { get; set; }
+        public char VarSep { get; set; }
 
-            set
+        private IDictionary<int, double> properties = new ConcurrentDictionary<int, double>();
+        public double this[int propertyIndex]
+        {
+            get
             {
-                propNames = value;
-                properties.Clear();
+                double value = .0;
+                properties.TryGetValue(propertyIndex, out value);
+                return value;
             }
         }
-        
-        public uint RefreshRate { get; set ; }
 
         private TcpListener listener;
         private TcpClient client;
@@ -91,47 +86,38 @@ namespace Ex2.Model.Server
             using (NetworkStream stream = client.GetStream())
             using (BinaryReader reader = new BinaryReader(stream))
             {
-                string[] propNames;
-                Stopwatch watch = new Stopwatch();
+                int currentProperty;
 
                 while (running)
                 {
-                    watch.Restart();
-
-                    propNames = this.propNames.ToArray<string>();
-                    int currentProperty = 0;
+                    currentProperty = 0;
+                    int ch;
+                    string num = "";
                     
-                    while (reader.PeekChar() != '\n')
+                    // read until end of line
+                    while ((ch = reader.ReadChar()) != LineSep)
                     {
-                        // skip commas
-                        if (reader.PeekChar() == ',')
-                            reader.ReadChar();
+                        // read until end of current variable
+                        do num += (char) ch;
+                        while ((ch = reader.Read()) != VarSep && ch != LineSep && ch != -1);
+                            
 
-                        // now read the double value
-                        double d = reader.ReadDouble();
+                        // if actually read a number
+                        if (num.Length > 0)
+                        {
+                            // set the current double
+                            double d;
+                            if (double.TryParse(num, out d))
+                                properties[currentProperty++] = d;
+                            num = "";
+                        }
 
-                        // insert into the table
-                        properties[propNames[currentProperty]] = d;
-
-                        // and move to next property
-                        currentProperty++;
+                        if (ch == LineSep)
+                            break;
                     }
-                    // clear '\n'
-                    reader.ReadChar();
 
                     // notify change
                     PropertyUpdate?.Invoke();
-
-                    /* calculate how much time has passed since entering the loop */
-                    watch.Stop();
-                    long millisElapsed = watch.ElapsedMilliseconds;
-
-                    // wait for at least 1 millisecond between reads
-                    long millisWait = Math.Max(1000 / RefreshRate, 1);
-
-                    /* sleep for the time left */
-                    long millisLeft = Math.Max(0, millisWait - millisElapsed);
-                    Thread.Sleep((int) millisLeft);
                 }
             }
         }
