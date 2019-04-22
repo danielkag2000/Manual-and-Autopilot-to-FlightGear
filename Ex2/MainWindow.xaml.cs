@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex2.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace Ex2
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PilotVM vm;
         public MainWindow()
         {
             InitializeComponent();
+            this.vm = new PilotVM();
+            this.DataContext = vm;
         }
     }
 }
