@@ -58,6 +58,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Server\FlightServer.cs" />
+    <Compile Include="Model\Server\IFlightServer.cs" />
+    <Compile Include="Model\Server\IVariablesServer.cs" />
+    <Compile Include="Model\Server\VariablesServer.cs" />
     <Compile Include="ViewModels\AutoPilotVM.cs" />
     <Compile Include="ViewModels\CommandHandler.cs" />
     <Compile Include="View\AutoPilotView.xaml.cs">

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ex2.Model.Client
 {
-    class FlightClient : IFlightClient
+    public class FlightClient : IFlightClient
     {
         private IPAddress ip;
         public string IP
@@ -44,19 +44,22 @@ namespace Ex2.Model.Client
             }
         }
 
-        public bool IsOpen { get; private set; }
 
-        private TcpClient client;
+        private TcpClient client = null;
+        public bool IsOpen { get => client != null && client.Connected; }
+
+        private BinaryWriter clientWriter;
 
         public void Close()
         {
-            if (!IsOpen)
-                throw new InvalidOperationException("Cannot close a connection that has not been opened.");
+            if (IsOpen)
+            {
+                try { clientWriter.Dispose(); client.Close(); }
+                catch (Exception) { }
+            }
 
-            client.Close();
             client = null;
-
-            IsOpen = false;
+            clientWriter = null;
         }
 
         public void Open()
@@ -64,17 +67,22 @@ namespace Ex2.Model.Client
             if (IsOpen)
                 throw new InvalidOperationException("Cannot open connection before closing current one!");
 
-            /* connect to flightgear server */
-            IPEndPoint endPoint = new IPEndPoint(ip, port);
-            client = new TcpClient();
-            client.Connect(endPoint);
+            try {
+                /* connect to flightgear server */
+                IPEndPoint endPoint = new IPEndPoint(ip, port);
+                client = new TcpClient();
+                client.Connect(endPoint);
+                Console.WriteLine("Connected to " + endPoint.ToString());
+            }
+            catch (Exception) { client = null; return; }
 
-            // change state to opened
-            IsOpen = true;
+
+            clientWriter = new BinaryWriter(client.GetStream());
         }
 
         public void SendLine(string line)
         {
+            
             List<string> lines = new List<string>();
             lines.Add(line);
             SendLines(lines);
@@ -82,15 +90,17 @@ namespace Ex2.Model.Client
 
         public void SendLines(IList<string> lines)
         {
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            if (!IsOpen)
+                throw new InvalidOperationException("Cannot send lines to unopened socket.");
+
+            foreach (string line in lines)
             {
-                foreach (string line in lines)
-                {
-                    writer.Write(line);
-                    writer.Write("\r\n");
-                }
+                clientWriter.Write(line.ToCharArray());
+                clientWriter.Write('\r');
+                clientWriter.Write('\n');
             }
+
+            clientWriter.Flush();
         }
     }
 }

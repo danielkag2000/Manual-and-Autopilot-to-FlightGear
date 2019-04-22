@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Ex2.Model.Server
 {
-    class VariablesServer : IVariablesServer
+    public class VariablesServer : IVariablesServer
     {
         private IDictionary<string, double> properties = new ConcurrentDictionary<string, double>();
 
@@ -83,10 +83,11 @@ namespace Ex2.Model.Server
             listener.Start();
 
             client = listener.AcceptTcpClient();
+            Console.WriteLine("Client Connected!");
 
             running = true;
             IsOpen = true;
-
+            
             using (NetworkStream stream = client.GetStream())
             using (BinaryReader reader = new BinaryReader(stream))
             {
