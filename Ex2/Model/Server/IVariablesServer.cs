@@ -11,12 +11,12 @@ namespace Ex2.Model.Server
     public interface IVariablesServer
     {
         uint Port { get; set; }
-        uint RefreshRate { get; set; }
 
         bool IsOpen { get; }
 
-        IList<string> PropertyNames { set; get; }
-        double this[string propertyName] { get; }
+        char LineSep { get; set; }
+        char VarSep { get; set; }
+        double this[int propertyIndex] { get; }
 
         event UpdateHandler PropertyUpdate;
 

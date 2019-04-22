@@ -10,34 +10,15 @@ namespace Ex2.Model.Server
 
     public class FlightServer : IFlightServer
     {
-        private const string LON_PATH = "/position/longitude-deg";
-        private const string LAT_PATH = "/position/latitude-deg";
-
         private IVariablesServer variables;
 
         public FlightServer()
         {
             variables = new VariablesServer();
 
-            // register all property names from XML file
-            variables.PropertyNames = new List<string>
-            {
-                "/position/longitude-deg",
-                "/position/latitude-deg",
-                "/instrumentation/altimeter/indicated-altitude-ft",
-                "/instrumentation/altimeter/pressure-alt-ft",
-                "/instrumentation/encoder/indicated-altitude-ft",
-                "/instrumentation/encoder/pressure-alt-ft",
-                "/instrumentation/gps/indicated-altitude-ft",
-                "/instrumentation/gps/indicated-ground-speed-kt",
-                "/instrumentation/gps/indicated-vertical-speed",
-                "/controls/flight/aileron",
-                "/controls/flight/elevator",
-                "/controls/flight/rudder",
-                "/controls/flight/flaps",
-                "/controls/engines/current-engine/throttle",
-                "/engines/engine/rpm"
-            };
+            // separators
+            variables.LineSep = '\n';
+            variables.VarSep = ',';
 
             // set the handler for property update event
             updateHandler = OnUpdate;
@@ -47,8 +28,9 @@ namespace Ex2.Model.Server
 
         public bool IsOpen => variables.IsOpen;
 
-        public double Lon => variables[LON_PATH];
-        public double Lat => variables[LAT_PATH];
+        // set the longitude and altitude according to their index
+        public double Lon => variables[0];
+        public double Lat => variables[1];
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -72,8 +54,8 @@ namespace Ex2.Model.Server
 
         public void Open()
         {
-            variables.Open();
             variables.PropertyUpdate += updateHandler;
+            variables.Open();
         }
     }
 }
