@@ -26,6 +26,7 @@ namespace FlightSimulator.Views
     public partial class FlightBoard : UserControl
     {
         ObservableDataSource<Point> planeLocations = null;
+
         public FlightBoard()
         {
             InitializeComponent();

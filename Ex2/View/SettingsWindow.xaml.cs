@@ -1,5 +1,4 @@
-﻿using Ex2.View;
-using Ex2.ViewModels;
+﻿using Ex2.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,25 +11,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ex2
+namespace Ex2.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SettingsWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SettingsWindow : Window
     {
-        private PilotVM vm;
-        public MainWindow()
+        public SettingsWindow()
         {
             InitializeComponent();
-            this.vm = new PilotVM();
-            this.DataContext = vm;
-
-            SettingsWindow wind = new SettingsWindow();
-            wind.Show();
+            DataContext = new SettingsVM(this);
         }
     }
 }
