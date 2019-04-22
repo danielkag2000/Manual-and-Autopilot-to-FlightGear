@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="Ex2.View.ManualPilotView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ex2.View"
+             xmlns:flightJoystick="clr-namespace:FlightSimulator.Views;assembly=FlightSimulator"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <Style x:Key="verticalWrite">
+            <Setter Property="Button.LayoutTransform">
+                <Setter.Value>
+                    <RotateTransform Angle="90" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <flightJoystick:Joystick x:Key="joystick"></flightJoystick:Joystick>
+    </UserControl.Resources>
+
+    <DockPanel TextBlock.FontSize="20" Background="White">
+        <!-- Top View - The aileron -->
+        <Grid DockPanel.Dock="Top" Margin="50,10,50,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">← aileron →</TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding AileronValue, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"></TextBlock>
+        </Grid>
+
+        <!-- Bottom View - The rudder -->
+        <Grid DockPanel.Dock="Bottom" Margin="0,50,50,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Slider Width="400" Minimum="20" Maximum="0" TickPlacement="BottomRight"></Slider>
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding RudderValue, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2">← rudder →</TextBlock>
+        </Grid>
+
+        <!-- Left View - The throttle -->
+        <Grid DockPanel.Dock="Left" Margin="10,50,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock VerticalAlignment="Center" Style="{StaticResource verticalWrite}">← throttle →</TextBlock>
+        </Grid>
+        
+        <!-- Right View - The elevator -->
+        <Grid DockPanel.Dock="Right" Margin="0,50,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource verticalWrite}" Text="{Binding ElevatorValue, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" Style="{StaticResource verticalWrite}">← elevator →</TextBlock>
+        </Grid>
+        
+        <!-- Center View - The Joystick -->
+        <flightJoystick:Joystick></flightJoystick:Joystick>
+    </DockPanel>
+</UserControl>

@@ -10,9 +10,11 @@
 
     <Window.Resources>
         <views:AutoPilotView x:Key="AutoPilot"></views:AutoPilotView>
+        <views:ManualPilotView x:Key="ManualPilot"></views:ManualPilotView>
     </Window.Resources>
     
     <Grid>
-        <views:AutoPilotView></views:AutoPilotView>
+        <!--<views:AutoPilotView></views:AutoPilotView>-->
+        <views:ManualPilotView></views:ManualPilotView>
     </Grid>
 </Window>
