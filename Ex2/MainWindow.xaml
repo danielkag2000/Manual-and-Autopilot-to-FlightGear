@@ -15,6 +15,7 @@
     
     <Grid>
         <!--<views:AutoPilotView></views:AutoPilotView>-->
+        <!--<views:ManualPilotView></views:ManualPilotView>-->
         <views:ManualPilotView></views:ManualPilotView>
     </Grid>
 </Window>

@@ -16,7 +16,7 @@ namespace Ex2.ViewModels
 
         public PilotVM()
         {
-            this.Model = new MainModel();
+            this.Model = MainModel.GetInstance();
         }
 
         public void NotifyPropertyChanged(string propName)

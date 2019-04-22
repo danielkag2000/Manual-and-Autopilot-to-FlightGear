@@ -19,7 +19,18 @@ namespace Ex2.Model
         public IFlightServer ServerModel => serverModel;
         public IFlightClient ClientModel => clientModel;
 
-        public MainModel()
+        private static MainModel instance;
+
+        public static MainModel GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new MainModel();
+            }
+            return instance;
+        }
+
+        private MainModel()
         {
             this.serverModel = new FlightServer();
             this.clientModel = new FlightClient();
