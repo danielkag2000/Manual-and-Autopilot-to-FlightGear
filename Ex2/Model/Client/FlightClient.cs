@@ -98,8 +98,9 @@ namespace Ex2.Model.Client
                 clientWriter.Write(line.ToCharArray());
                 clientWriter.Write('\r');
                 clientWriter.Write('\n');
-                clientWriter.Flush();
             }
+
+            clientWriter.Flush();
         }
     }
 }
