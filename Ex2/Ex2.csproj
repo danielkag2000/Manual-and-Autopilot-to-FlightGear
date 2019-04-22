@@ -69,6 +69,10 @@
     <Compile Include="View\AutoPilotView.xaml.cs">
       <DependentUpon>AutoPilotView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\ManualPilot.cs" />
+    <Compile Include="View\ManualPilotView.xaml.cs">
+      <DependentUpon>ManualPilotView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\StateToBackgroundConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -83,6 +87,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\AutoPilotView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManualPilotView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
