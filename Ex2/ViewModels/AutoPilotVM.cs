@@ -7,17 +7,24 @@ using Ex2.Model.Client;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Threading;
+using Ex2.Model;
 
 namespace Ex2.ViewModels
 {
-    public partial class PilotVM : INotifyPropertyChanged
+    public class AutoPilotVM : INotifyPropertyChanged
     {
+        private MainModel Model;
+        public AutoPilotVM()
+        {
+            this.Model = MainModel.GetInstance();
+        }
 
-        public enum State { DIRTY, CLEAN, SENDING}
+        public enum State { DIRTY, CLEAN, SENDING }
         private State curState = State.CLEAN;
         public State CurState
         {
-            get {
+            get
+            {
                 return curState;
             }
 
@@ -78,6 +85,9 @@ namespace Ex2.ViewModels
         }
 
         private ICommand _okCommand;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ICommand OKCommand
         {
             get
@@ -99,12 +109,17 @@ namespace Ex2.ViewModels
 
                 foreach (string cmd in commands)
                 {
-                    //Model.ClientModel.SendLine(cmd);
-                    Thread.Sleep(2000);
+                        //Model.ClientModel.SendLine(cmd);
+                        Thread.Sleep(2000);
                 }
                 CurState = State.SENDING;
             });
             task.Start();
+        }
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

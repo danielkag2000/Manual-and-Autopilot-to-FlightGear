@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Ex2.Model;
+using FlightSimulator.Model.EventArgs;
+using FlightSimulator.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,8 +10,23 @@ using System.Threading.Tasks;
 
 namespace Ex2.ViewModels
 {
-    public partial class PilotVM : INotifyPropertyChanged
+
+    public class ManualPilotVM : INotifyPropertyChanged
     {
+
+        private MainModel Model;
+        private Joystick joystick;
+        public ManualPilotVM()
+        {
+            this.Model = MainModel.GetInstance();
+        }
+
+        public void updateAileronAndElevator(Joystick sender, VirtualJoystickEventArgs args)
+        {
+            AileronValue = args.Aileron;
+            ElevatorValue = args.Elevator;
+        }
+
         private double aileronValue = 0;
         public double AileronValue
         {
@@ -17,6 +35,7 @@ namespace Ex2.ViewModels
             {
                 aileronValue = value;
                 NotifyPropertyChanged("AileronValue");
+                SetProperty("/controls/flight/aileron", aileronValue);
             }
         }
 
@@ -28,6 +47,7 @@ namespace Ex2.ViewModels
             {
                 elevatorValue = value;
                 NotifyPropertyChanged("ElevatorValue");
+                SetProperty("/controls/flight/elevator", elevatorValue);
             }
         }
 
@@ -39,10 +59,14 @@ namespace Ex2.ViewModels
             {
                 rudderValue = value;
                 NotifyPropertyChanged("RudderValue");
+                SetProperty("/controls/flight/rudder", rudderValue);
             }
         }
 
         private double throttleValue = 0;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public double ThrottleValue
         {
             get { return throttleValue; }
@@ -50,7 +74,18 @@ namespace Ex2.ViewModels
             {
                 throttleValue = value;
                 NotifyPropertyChanged("ThrottleValue");
+                SetProperty("/controls/engines/current-engine/throttle", throttleValue);
             }
+        }
+
+        private void SetProperty(string path, double value)
+        {
+            //Model.ClientModel.SendLine($"set {path} {value}");
+        }
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

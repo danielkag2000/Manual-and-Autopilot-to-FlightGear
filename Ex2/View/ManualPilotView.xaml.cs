@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex2.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace Ex2.View
     /// </summary>
     public partial class ManualPilotView : UserControl
     {
+        private ManualPilotVM vm;
         public ManualPilotView()
         {
             InitializeComponent();
+            vm = new ManualPilotVM();
+            DataContext = vm;
         }
     }
 }

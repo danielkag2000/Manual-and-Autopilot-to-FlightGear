@@ -21,9 +21,12 @@ namespace Ex2.View
     /// </summary>
     public partial class AutoPilotView : UserControl
     {
+        private AutoPilotVM vm;
         public AutoPilotView()
         {
             InitializeComponent();
+            vm = new AutoPilotVM();
+            DataContext = vm;
         }
     }
 }
