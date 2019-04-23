@@ -33,6 +33,11 @@ namespace Ex2.Model.Server
         public double Lat => variables[1];
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event ConnectionEvent OnConnection
+        {
+            add => variables.OnConnection += value;
+            remove => variables.OnConnection -= value;
+        }
 
         private void OnUpdate()
         {

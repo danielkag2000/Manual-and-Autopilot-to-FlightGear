@@ -29,6 +29,12 @@ namespace Ex2.Model.Server
             remove => Server.PropertyChanged -= value;
         }
 
+        public event ConnectionEvent OnConnection
+        {
+            add => Server.OnConnection += value;
+            remove => Server.OnConnection -= value;
+        }
+
         public void Close()
         {
             // close and wait for the server to finish up

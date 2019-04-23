@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Ex2.Model.Server
 {
     public delegate void UpdateHandler();
+    public delegate void ConnectionEvent();
 
     public interface IVariablesServer
     {
@@ -19,6 +20,7 @@ namespace Ex2.Model.Server
         double this[int propertyIndex] { get; }
 
         event UpdateHandler PropertyUpdate;
+        event ConnectionEvent OnConnection;
 
         void Open();
         void Close();

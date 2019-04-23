@@ -16,6 +16,8 @@ namespace Ex2.Model.Server
         double Lon { get; }
         double Lat { get; }
 
+        event ConnectionEvent OnConnection;
+
         void Open();
         void Close();
     }

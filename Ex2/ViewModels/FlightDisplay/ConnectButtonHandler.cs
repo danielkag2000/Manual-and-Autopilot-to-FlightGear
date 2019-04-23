@@ -27,21 +27,14 @@ namespace Ex2.ViewModels.FlightDisplay
 
         public void Execute(object parameter)
         {
-            /* close old connections */
-            if (MainModel.ClientModel.IsOpen)
-                MainModel.ClientModel.Close();
-            if (MainModel.ServerModel.IsOpen)
-                MainModel.ServerModel.Close();
+            // close old connections
+            MainModel.CloseOpenConnections();
 
-            /* set connection parameters */
-            MainModel.ClientModel.IP = SettingsModel.FlightServerIP;
-            MainModel.ClientModel.Port = (uint)SettingsModel.FlightCommandPort;
+            // init connection parameters
+            MainModel.InitConnections(SettingsModel);
 
-            MainModel.ServerModel.Port = (uint)SettingsModel.FlightInfoPort;
-
-            /* open connections */
-            MainModel.ServerModel.Open();
-            MainModel.ClientModel.Open();
+            // re-open connections
+            MainModel.OpenConnections();
         }
     }
 }

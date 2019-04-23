@@ -52,6 +52,7 @@ namespace Ex2.Model.Server
         private bool running;
 
         public event UpdateHandler PropertyUpdate;
+        public event ConnectionEvent OnConnection;
 
         public void Close()
         {
@@ -132,6 +133,7 @@ namespace Ex2.Model.Server
 
                 client = listener.AcceptTcpClient();
                 Console.WriteLine("Client Connected!");
+                OnConnection?.Invoke();
 
                 running = true;
                 ReadClient(client, ref running);

@@ -1,5 +1,6 @@
 ﻿using Ex2.Model.Client;
 using Ex2.Model.Server;
+using FlightSimulator.Model.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,9 @@ namespace Ex2.Model
     {
         IFlightServer ServerModel { get; }
         IFlightClient ClientModel { get; }
+
+        void CloseOpenConnections();
+        void InitConnections(ISettingsModel settingsModel);
+        void OpenConnections();
     }
 }
