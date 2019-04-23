@@ -70,7 +70,7 @@ namespace Ex2.ViewModels
 
         private void SetProperty(string path, double value)
         {
-            //Model.ClientModel.SendLine($"set {path} {value}");
+            Model.ClientModel.SendLine($"set {path} {value}");
         }
 
         public JoystickValues ValuesListener

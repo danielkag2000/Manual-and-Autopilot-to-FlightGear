@@ -109,7 +109,7 @@ namespace Ex2.ViewModels
 
                 foreach (string cmd in commands)
                 {
-                        //Model.ClientModel.SendLine(cmd);
+                        Model.ClientModel.SendLine(cmd);
                         Thread.Sleep(2000);
                 }
                 CurState = State.SENDING;
