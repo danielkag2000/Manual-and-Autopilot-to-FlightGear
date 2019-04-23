@@ -1,6 +1,7 @@
 ﻿using FlightSimulator.Model.EventArgs;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace FlightSimulator.Views
     /// <summary>
     /// Interaction logic for Joystick.xaml
     /// </summary>
-    public partial class Joystick : UserControl
+    public partial class Joystick : UserControl, INotifyPropertyChanged
     {
         /// <summary>Current Aileron</summary>
         public static readonly DependencyProperty AileronProperty =
@@ -38,11 +39,24 @@ namespace FlightSimulator.Views
         public static readonly DependencyProperty ElevatorStepProperty =
             DependencyProperty.Register("ElevatorStep", typeof(double), typeof(Joystick), new PropertyMetadata(1.0));
 
+        public static readonly DependencyProperty ValuesProperty =
+            DependencyProperty.Register("Values", typeof(JoystickValues), typeof(Joystick), new PropertyMetadata(null));
+
+        
+        public JoystickValues Values
+        {
+            get => GetValue(ValuesProperty) as JoystickValues;
+            set
+            {
+                SetValue(ValuesProperty, value);
+            }
+        }
+
         /* Unstable - needs work */
         ///// <summary>Indicates whether the joystick knob resets its place after being released</summary>
         //public static readonly DependencyProperty ResetKnobAfterReleaseProperty =
         //    DependencyProperty.Register(nameof(ResetKnobAfterRelease), typeof(bool), typeof(VirtualJoystick), new PropertyMetadata(true));
-
+        
         /// <summary>Current Aileron in degrees from 0 to 360</summary>
         public double Aileron
         {
@@ -103,6 +117,7 @@ namespace FlightSimulator.Views
 
         /// <summary>This event fires once the joystick is captured</summary>
         public event EmptyJoystickEventHandler Captured;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private Point _startPos;
         private double _prevAileron, _prevElevator;
@@ -159,6 +174,7 @@ namespace FlightSimulator.Views
             Aileron = Aileron / 124.0;
             Elevator = Elevator / 124.0;
             Moved?.Invoke(this, new VirtualJoystickEventArgs { Aileron = Aileron, Elevator = Elevator });
+            Values = new JoystickValues { Aileron = Aileron, Elevator = Elevator };
             _prevAileron = Aileron;
             _prevElevator = Elevator;
 
@@ -176,5 +192,11 @@ namespace FlightSimulator.Views
             Released?.Invoke(this);
         }
 
+    }
+
+    public class JoystickValues
+    {
+        public double Aileron { get; internal set; }
+        public double Elevator { get; internal set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Ex2.Model;
 using FlightSimulator.Model.EventArgs;
+using FlightSimulator.ViewModels;
 using FlightSimulator.Views;
 using System;
 using System.Collections.Generic;
@@ -11,27 +12,17 @@ using System.Threading.Tasks;
 namespace Ex2.ViewModels
 {
 
-    public class ManualPilotVM : INotifyPropertyChanged
+    public class ManualPilotVM : BaseNotify
     {
 
         private IMainModel Model;
-        private Joystick joystick;
         public ManualPilotVM()
-        {
-            Model = MainModel.Instance;
-            
-        }
-
-        public void updateAileronAndElevator(Joystick sender, VirtualJoystickEventArgs args)
-        {
-            AileronValue = args.Aileron;
-            ElevatorValue = args.Elevator;
-        }
+            => Model = MainModel.Instance;   
 
         private double aileronValue = 0;
         public double AileronValue
         {
-            get { return aileronValue; }
+            get { return NiceRound(aileronValue); }
             set
             {
                 aileronValue = value;
@@ -43,7 +34,7 @@ namespace Ex2.ViewModels
         private double elevatorValue = 0;
         public double ElevatorValue
         {
-            get { return elevatorValue; }
+            get { return NiceRound(elevatorValue); }
             set
             {
                 elevatorValue = value;
@@ -55,7 +46,7 @@ namespace Ex2.ViewModels
         private double rudderValue = 0;
         public double RudderValue
         {
-            get { return rudderValue; }
+            get { return NiceRound(rudderValue); }
             set
             {
                 rudderValue = value;
@@ -66,11 +57,9 @@ namespace Ex2.ViewModels
 
         private double throttleValue = 0;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public double ThrottleValue
         {
-            get { return throttleValue; }
+            get { return NiceRound(throttleValue); }
             set
             {
                 throttleValue = value;
@@ -84,18 +73,18 @@ namespace Ex2.ViewModels
             //Model.ClientModel.SendLine($"set {path} {value}");
         }
 
-        public void NotifyPropertyChanged(string propName)
+        public JoystickValues ValuesListener
         {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+            set
+            {
+                if (value == null)
+                    return;
+
+                AileronValue = value.Aileron;
+                ElevatorValue = value.Elevator;
+            }
         }
 
-        public delegate void MovedJoystick(Joystick sender, VirtualJoystickEventArgs args);
-
-        public MovedJoystick MovedHandler => MyMoveHandler;
-
-        public void MyMoveHandler(Joystick sender, VirtualJoystickEventArgs args)
-        {
-            Console.WriteLine($"Moved!~ {sender.Aileron}, {sender.Elevator}.");
-        }
+        private double NiceRound(double d) => Math.Round(d * 100) / 100;
     }
 }
