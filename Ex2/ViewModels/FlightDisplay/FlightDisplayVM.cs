@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using FlightSimulator.ViewModels;
 
 namespace Ex2.ViewModels.FlightDisplay
 {
-    public class FlightDisplayVM : IFlightDisplayVM
+    public class FlightDisplayVM : IFlightDisplayVM, INotifyPropertyChanged
     {
         private IMainModel MainModel { get; }
         private ISettingsModel SettingsModel { get; }
@@ -26,6 +27,9 @@ namespace Ex2.ViewModels.FlightDisplay
             (connectCmd = new ConnectButtonHandler(MainModel, SettingsModel));
 
         private IFlightBoardVM flightBoardVM;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public IFlightBoardVM FlightBoardVM => flightBoardVM ??
             (flightBoardVM = new FlightBoardVM(MainModel.ServerModel));
 
@@ -36,6 +40,8 @@ namespace Ex2.ViewModels.FlightDisplay
 
             // connect the server and client upon initialization
             ConnectCommand.Execute(null);
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FlightBoardVM"));
         }
     }
 
