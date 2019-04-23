@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Ex2.Model;
+using Ex2.ViewModels.FlightDisplay;
+using FlightSimulator.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +26,8 @@ namespace Ex2.View
         public FlightDisplay()
         {
             InitializeComponent();
+            DataContext = new FlightDisplayVM(MainModel.Instance,
+                ApplicationSettingsModel.Instance);
         }
     }
 }

@@ -1,14 +1,13 @@
 ﻿using Ex2.Model.Client;
 using Ex2.Model.Server;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex2.Model
 {
+    /// <summary>
+    /// The main model used in the project (for the client and server)
+    /// Its purpose is to serve as a singleton so that there will
+    /// be only one client and one server models
+    /// </summary>
     class MainModel : IMainModel
     {
         #region Singleton
@@ -20,13 +19,9 @@ namespace Ex2.Model
                 new FlightClient()));
         #endregion
 
-        //public event PropertyChangedEventHandler PropertyChanged;
-
         public IFlightServer ServerModel { get; private set; }
         public IFlightClient ClientModel { get; private set; }
-
         
-
         private MainModel(IFlightServer serverModel, IFlightClient clientModel)
         {
             ServerModel = serverModel;
