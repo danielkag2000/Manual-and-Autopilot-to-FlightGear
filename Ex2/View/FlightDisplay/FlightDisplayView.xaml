@@ -18,8 +18,8 @@
         <WrapPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
             <WrapPanel.Resources>
                 <Style TargetType="Button">
-                    <Setter Property="Padding" Value="13 8" />
-                    <Setter Property="Margin" Value="5 20" />
+                    <Setter Property="Padding" Value="13,8" />
+                    <Setter Property="Margin" Value="5,0" />
                     <Setter Property="HorizontalContentAlignment" Value="Center" />
                 </Style>
             </WrapPanel.Resources>
