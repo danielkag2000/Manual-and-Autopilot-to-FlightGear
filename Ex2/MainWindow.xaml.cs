@@ -28,9 +28,6 @@ namespace Ex2
             InitializeComponent();
             this.vm = new PilotVM();
             this.DataContext = vm;
-
-            SettingsWindow wind = new SettingsWindow();
-            wind.Show();
         }
     }
 }
