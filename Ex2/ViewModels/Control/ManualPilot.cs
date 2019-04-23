@@ -14,11 +14,11 @@ namespace Ex2.ViewModels
     public class ManualPilotVM : INotifyPropertyChanged
     {
 
-        private MainModel Model;
+        private IMainModel Model;
         private Joystick joystick;
         public ManualPilotVM()
         {
-            this.Model = MainModel.GetInstance();
+            Model = MainModel.Instance;
         }
 
         public void updateAileronAndElevator(Joystick sender, VirtualJoystickEventArgs args)

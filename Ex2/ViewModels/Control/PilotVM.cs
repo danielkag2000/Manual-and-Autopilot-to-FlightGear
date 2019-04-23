@@ -12,11 +12,11 @@ namespace Ex2.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private MainModel Model;
+        private IMainModel Model;
 
         public PilotVM()
         {
-            this.Model = MainModel.GetInstance();
+            Model = MainModel.Instance;
         }
 
         public void NotifyPropertyChanged(string propName)

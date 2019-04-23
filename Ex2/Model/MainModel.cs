@@ -9,31 +9,27 @@ using System.Threading.Tasks;
 
 namespace Ex2.Model
 {
-    class MainModel : INotifyPropertyChanged
+    class MainModel : IMainModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private IFlightServer serverModel;
-        private IFlightClient clientModel;
-
-        public IFlightServer ServerModel => serverModel;
-        public IFlightClient ClientModel => clientModel;
-
+        #region Singleton
         private static MainModel instance;
 
-        public static MainModel GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new MainModel();
-            }
-            return instance;
-        }
+        public static MainModel Instance =>
+            instance ??
+            (instance = new MainModel(new FlightServer(), new FlightClient()));
+        #endregion
 
-        private MainModel()
+        //public event PropertyChangedEventHandler PropertyChanged;
+
+        public IFlightServer ServerModel { get; private set; }
+        public IFlightClient ClientModel { get; private set; }
+
+        
+
+        private MainModel(IFlightServer serverModel, IFlightClient clientModel)
         {
-            this.serverModel = new FlightServer();
-            this.clientModel = new FlightClient();
+            ServerModel = serverModel;
+            ClientModel = clientModel;
         }
     }
 }
