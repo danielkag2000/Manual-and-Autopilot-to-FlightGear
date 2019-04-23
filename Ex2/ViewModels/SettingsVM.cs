@@ -1,5 +1,6 @@
 ﻿using FlightSimulator.Model;
 using FlightSimulator.Model.Interface;
+using FlightSimulator.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ using System.Windows.Input;
 
 namespace Ex2.ViewModels
 {
-    public class SettingsVM : INotifyPropertyChanged
+    public class SettingsVM : BaseNotify
     {
 
         public ICommand OKCommand { get; private set; }
@@ -116,13 +117,6 @@ namespace Ex2.ViewModels
                 throw new ArgumentException($"Invalid value: {value}");
             }
             Invalid &= ~(1 << propertyIndex);
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(string prop)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         /***********************************************

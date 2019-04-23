@@ -1,5 +1,6 @@
 ﻿using Ex2.Model;
 using FlightSimulator.Model.EventArgs;
+using FlightSimulator.ViewModels;
 using FlightSimulator.Views;
 using System;
 using System.Collections.Generic;
@@ -11,17 +12,16 @@ using System.Threading.Tasks;
 namespace Ex2.ViewModels
 {
 
-    public class ManualPilotVM : INotifyPropertyChanged
+    public class ManualPilotVM : BaseNotify
     {
 
         private MainModel Model;
-        private Joystick joystick;
         public ManualPilotVM()
         {
             this.Model = MainModel.GetInstance();
         }
 
-        public void updateAileronAndElevator(Joystick sender, VirtualJoystickEventArgs args)
+        public void UpdateAileronAndElevator(Joystick sender, VirtualJoystickEventArgs args)
         {
             AileronValue = args.Aileron;
             ElevatorValue = args.Elevator;
@@ -64,9 +64,6 @@ namespace Ex2.ViewModels
         }
 
         private double throttleValue = 0;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public double ThrottleValue
         {
             get { return throttleValue; }
@@ -81,11 +78,6 @@ namespace Ex2.ViewModels
         private void SetProperty(string path, double value)
         {
             //Model.ClientModel.SendLine($"set {path} {value}");
-        }
-
-        public void NotifyPropertyChanged(string propName)
-        {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

@@ -6,16 +6,32 @@
         xmlns:local="clr-namespace:Ex2"
         xmlns:views="clr-namespace:Ex2.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="900"
+        MinHeight="500" MinWidth="900">
 
     <Window.Resources>
         <views:AutoPilotView x:Key="AutoPilot"></views:AutoPilotView>
         <views:ManualPilotView x:Key="ManualPilot"></views:ManualPilotView>
     </Window.Resources>
-    
+
     <Grid>
-        <!--<views:AutoPilotView></views:AutoPilotView>-->
-        <!--<views:ManualPilotView></views:ManualPilotView>-->
-        <views:ManualPilotView></views:ManualPilotView>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--<views:AutoPilotView />-->
+        <!--<views:ManualPilotView />-->
+
+        <TabControl Grid.Column="1" Grid.Row="0">
+            <TabItem Header="Manual">
+                <views:ManualPilotView />
+            </TabItem>
+            <TabItem Header="Auto Pilot">
+                <views:AutoPilotView />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
