@@ -22,15 +22,6 @@ namespace Ex2.ViewModels
             this.Model = MainModel.GetInstance();
         }
 
-        private ICommand _okCommand;
-
-        public ICommand OKCommand
-        {
-            get
-            {
-                return _okCommand ?? (_okCommand = new CommandHandler(() => OnOKClick()));
-            }
-        }
         public void UpdateAileronAndElevator(Joystick sender, VirtualJoystickEventArgs args)
         {
             AileronValue = args.Aileron;
