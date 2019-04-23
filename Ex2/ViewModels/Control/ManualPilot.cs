@@ -19,6 +19,7 @@ namespace Ex2.ViewModels
         public ManualPilotVM()
         {
             Model = MainModel.Instance;
+            
         }
 
         public void updateAileronAndElevator(Joystick sender, VirtualJoystickEventArgs args)
@@ -86,6 +87,15 @@ namespace Ex2.ViewModels
         public void NotifyPropertyChanged(string propName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
+        }
+
+        public delegate void MovedJoystick(Joystick sender, VirtualJoystickEventArgs args);
+
+        public MovedJoystick MovedHandler => MyMoveHandler;
+
+        public void MyMoveHandler(Joystick sender, VirtualJoystickEventArgs args)
+        {
+            Console.WriteLine($"Moved!~ {sender.Aileron}, {sender.Elevator}.");
         }
     }
 }

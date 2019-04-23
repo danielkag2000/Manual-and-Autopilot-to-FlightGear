@@ -28,5 +28,10 @@ namespace Ex2.View
             vm = new ManualPilotVM();
             DataContext = vm;
         }
+
+        private void MyJoystick_Moved(FlightSimulator.Views.Joystick sender, FlightSimulator.Model.EventArgs.VirtualJoystickEventArgs args)
+        {
+
+        }
     }
 }
