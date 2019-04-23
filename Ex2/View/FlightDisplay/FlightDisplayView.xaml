@@ -30,7 +30,7 @@
 
         <!-- The display board -->
         <display:FlightBoard Grid.Row="1" Margin="15"
-                             DataContext="{Binding FlightBoardVM}"/>
+                             DataContext="{Binding FlightBoardVM, Mode=OneWay}"/>
 
     </Grid>
 </UserControl>
