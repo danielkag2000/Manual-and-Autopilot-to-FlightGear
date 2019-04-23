@@ -27,6 +27,28 @@ namespace FlightSimulator.Views
     {
         ObservableDataSource<Point> planeLocations = null;
 
+        public new object DataContext
+        {
+            get => base.DataContext;
+            set
+            {
+                INotifyPropertyChanged vm;
+
+                // remove old listener
+                vm = DataContext as INotifyPropertyChanged;
+                if (vm != null)
+                    vm.PropertyChanged -= Vm_PropertyChanged;
+
+                // set new data context
+                base.DataContext = value;
+
+                // add new listener
+                vm = DataContext as INotifyPropertyChanged;
+                if (vm != null)
+                    vm.PropertyChanged += Vm_PropertyChanged;
+            }
+        }
+
         public FlightBoard()
         {
             InitializeComponent();
@@ -45,7 +67,15 @@ namespace FlightSimulator.Views
         {
             if(e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon"))
             {
-                Point p1 = new Point(0,0);            // Fill here!
+                // works only with a IFlightBoardVM
+                IFlightBoardVM vm = sender as IFlightBoardVM;
+
+                if (vm == null)
+                    return;
+
+                // insert the matching point for this event
+                Point p1 = new Point(vm.Lat,vm.Lon);
+
                 planeLocations.AppendAsync(Dispatcher, p1);
             }
         }

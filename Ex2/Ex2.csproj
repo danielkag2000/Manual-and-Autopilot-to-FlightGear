@@ -50,6 +50,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <PlatformTarget>x64</PlatformTarget>
+    <OutputPath>bin\x64\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DynamicDataDisplay, Version=0.3.0.0, Culture=neutral, PublicKeyToken=5b7d744a7263923f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -75,26 +83,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\IMainModel.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\Server\FlightServer.cs" />
     <Compile Include="Model\Server\IFlightServer.cs" />
     <Compile Include="Model\Server\IVariablesServer.cs" />
+    <Compile Include="Model\Server\ParallelFlightServer.cs" />
     <Compile Include="Model\Server\VariablesServer.cs" />
-    <Compile Include="ViewModels\AutoPilotVM.cs" />
+    <Compile Include="ViewModels\Control\AutoPilotVM.cs" />
     <Compile Include="ViewModels\CommandHandler.cs" />
-    <Compile Include="ViewModels\PilotVM.cs" />
+    <Compile Include="ViewModels\Control\PilotVM.cs" />
+    <Compile Include="ViewModels\FlightDisplay\ConnectButtonHandler.cs" />
+    <Compile Include="ViewModels\FlightDisplay\FlightBoardVM.cs" />
+    <Compile Include="ViewModels\FlightDisplay\FlightDisplayVM.cs" />
+    <Compile Include="ViewModels\FlightDisplay\IFlightDisplayVM.cs" />
+    <Compile Include="ViewModels\FlightDisplay\SettingsCommandHandler.cs" />
     <Compile Include="ViewModels\SettingsVM.cs" />
-    <Compile Include="View\AutoPilotView.xaml.cs">
+    <Compile Include="View\Control\AutoPilotView.xaml.cs">
       <DependentUpon>AutoPilotView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\ManualPilot.cs" />
-    <Compile Include="View\ManualPilotView.xaml.cs">
+    <Compile Include="ViewModels\Control\ManualPilot.cs" />
+    <Compile Include="View\FlightDisplay\FlightDisplayView.xaml.cs">
+      <DependentUpon>FlightDisplayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Control\ManualPilotView.xaml.cs">
       <DependentUpon>ManualPilotView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\StateToBackgroundConverter.cs" />
+    <Compile Include="View\Control\StateToBackgroundConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -107,11 +125,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\AutoPilotView.xaml">
+    <Page Include="View\Control\AutoPilotView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManualPilotView.xaml">
+    <Page Include="View\FlightDisplay\FlightDisplayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Control\ManualPilotView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

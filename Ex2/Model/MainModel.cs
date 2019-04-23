@@ -1,39 +1,31 @@
 ﻿using Ex2.Model.Client;
 using Ex2.Model.Server;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ex2.Model
 {
-    class MainModel : INotifyPropertyChanged
+    /// <summary>
+    /// The main model used in the project (for the client and server)
+    /// Its purpose is to serve as a singleton so that there will
+    /// be only one client and one server models
+    /// </summary>
+    class MainModel : IMainModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private IFlightServer serverModel;
-        private IFlightClient clientModel;
-
-        public IFlightServer ServerModel => serverModel;
-        public IFlightClient ClientModel => clientModel;
-
+        #region Singleton
         private static MainModel instance;
 
-        public static MainModel GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new MainModel();
-            }
-            return instance;
-        }
+        public static MainModel Instance =>
+            instance ??
+            (instance = new MainModel(new ParallelFlightServer(new FlightServer()),
+                new FlightClient()));
+        #endregion
 
-        private MainModel()
+        public IFlightServer ServerModel { get; private set; }
+        public IFlightClient ClientModel { get; private set; }
+        
+        private MainModel(IFlightServer serverModel, IFlightClient clientModel)
         {
-            this.serverModel = new FlightServer();
-            this.clientModel = new FlightClient();
+            ServerModel = serverModel;
+            ClientModel = clientModel;
         }
     }
 }

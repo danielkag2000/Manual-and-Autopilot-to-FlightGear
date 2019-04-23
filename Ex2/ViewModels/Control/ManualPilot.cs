@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Ex2.ViewModels
 {
@@ -16,22 +15,14 @@ namespace Ex2.ViewModels
     public class ManualPilotVM : BaseNotify
     {
 
-        private MainModel Model;
+        private IMainModel Model;
         public ManualPilotVM()
-        {
-            this.Model = MainModel.GetInstance();
-        }
-
-        public void UpdateAileronAndElevator(Joystick sender, VirtualJoystickEventArgs args)
-        {
-            AileronValue = args.Aileron;
-            ElevatorValue = args.Elevator;
-        }
+            => Model = MainModel.Instance;   
 
         private double aileronValue = 0;
         public double AileronValue
         {
-            get { return aileronValue; }
+            get { return NiceRound(aileronValue); }
             set
             {
                 aileronValue = value;
@@ -43,7 +34,7 @@ namespace Ex2.ViewModels
         private double elevatorValue = 0;
         public double ElevatorValue
         {
-            get { return elevatorValue; }
+            get { return NiceRound(elevatorValue); }
             set
             {
                 elevatorValue = value;
@@ -55,7 +46,7 @@ namespace Ex2.ViewModels
         private double rudderValue = 0;
         public double RudderValue
         {
-            get { return rudderValue; }
+            get { return NiceRound(rudderValue); }
             set
             {
                 rudderValue = value;
@@ -65,9 +56,10 @@ namespace Ex2.ViewModels
         }
 
         private double throttleValue = 0;
+
         public double ThrottleValue
         {
-            get { return throttleValue; }
+            get { return NiceRound(throttleValue); }
             set
             {
                 throttleValue = value;
@@ -80,5 +72,19 @@ namespace Ex2.ViewModels
         {
             //Model.ClientModel.SendLine($"set {path} {value}");
         }
+
+        public JoystickValues ValuesListener
+        {
+            set
+            {
+                if (value == null)
+                    return;
+
+                AileronValue = value.Aileron;
+                ElevatorValue = value.Elevator;
+            }
+        }
+
+        private double NiceRound(double d) => Math.Round(d * 100) / 100;
     }
 }

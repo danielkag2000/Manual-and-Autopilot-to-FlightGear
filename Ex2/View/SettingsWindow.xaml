@@ -11,10 +11,12 @@
             <Style TargetType="TextBlock">
                 <Setter Property="Padding" Value="3"/>
                 <Setter Property="Margin" Value="3"/>
+                <Setter Property="Grid.Column" Value="0" />
             </Style>
             <Style TargetType="TextBox">
                 <Setter Property="Padding" Value="3"/>
                 <Setter Property="Margin" Value="3"/>
+                <Setter Property="Grid.Column" Value="1" />
             </Style>
         </Grid.Resources>
 
@@ -32,19 +34,19 @@
 
         <!-- Row 1-->
         <TextBlock Grid.Row="1">Flight Server IP:</TextBlock>
-        <TextBox Grid.Row="1" Grid.Column="1" 
+        <TextBox Grid.Row="1"
                  Text="{Binding FlightServerIP, ValidatesOnExceptions=True,
                         UpdateSourceTrigger=PropertyChanged}"/>
 
         <!-- Row 2 -->
         <TextBlock Grid.Row="2">Flight Info Port:</TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="1"
+        <TextBox Grid.Row="2"
                  Text="{Binding FlightInfoPort, ValidatesOnExceptions=True,
                         UpdateSourceTrigger=PropertyChanged}" />
 
         <!-- Row 3 -->
         <TextBlock Grid.Row="3">Flight Command Port:</TextBlock>
-        <TextBox Grid.Row="3" Grid.Column="1"
+        <TextBox Grid.Row="3"
                  Text="{Binding FlightCommandPort, ValidatesOnExceptions=True,
                         UpdateSourceTrigger=PropertyChanged}"/>
 

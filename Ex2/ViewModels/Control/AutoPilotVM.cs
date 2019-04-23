@@ -8,16 +8,15 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Threading;
 using Ex2.Model;
-using FlightSimulator.ViewModels;
 
 namespace Ex2.ViewModels
 {
-    public class AutoPilotVM : BaseNotify
+    public class AutoPilotVM : INotifyPropertyChanged
     {
-        private MainModel Model;
+        private IMainModel Model;
         public AutoPilotVM()
         {
-            this.Model = MainModel.GetInstance();
+            Model = MainModel.Instance;
         }
 
         public enum State { DIRTY, CLEAN, SENDING }
@@ -87,6 +86,8 @@ namespace Ex2.ViewModels
 
         private ICommand _okCommand;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ICommand OKCommand
         {
             get
@@ -114,6 +115,11 @@ namespace Ex2.ViewModels
                 CurState = State.SENDING;
             });
             task.Start();
+        }
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }
