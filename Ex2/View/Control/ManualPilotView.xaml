@@ -50,7 +50,7 @@
         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="4" Grid.Row="2" Style="{StaticResource verticalWrite}">← elevator →</TextBlock>
 
         <Slider Grid.Column="2" Grid.Row="3" IsSnapToTickEnabled="True" Value="{Binding RudderValue, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Maximum="1" Minimum="-1" TickFrequency="0.05" TickPlacement="BottomRight" />
-        <Slider Grid.Column="1" Grid.Row="2" IsSnapToTickEnabled="True" Value="{Binding ThrottleValue, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource verticalWrite}" VerticalAlignment="Center" HorizontalAlignment="Stretch" Maximum="1" Minimum="-1" TickFrequency="0.05" TickPlacement="BottomRight" MinWidth="300" />
+        <Slider Grid.Column="1" Grid.Row="2" IsSnapToTickEnabled="True" Value="{Binding ThrottleValue, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource verticalWrite}" VerticalAlignment="Stretch" HorizontalAlignment="Left" Maximum="1" Minimum="-1" TickFrequency="0.05" TickPlacement="BottomRight" MinWidth="300" />
 
     </Grid>
 
