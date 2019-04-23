@@ -46,10 +46,7 @@ namespace FlightSimulator.Views
         public JoystickValues Values
         {
             get => GetValue(ValuesProperty) as JoystickValues;
-            set
-            {
-                SetValue(ValuesProperty, value);
-            }
+            set => SetValue(ValuesProperty, value);
         }
 
         /* Unstable - needs work */
@@ -168,7 +165,7 @@ namespace FlightSimulator.Views
             knobPosition.X = deltaPos.X;
             knobPosition.Y = deltaPos.Y;
 
-            if (Moved == null || (!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
+            if ((!(Math.Abs(_prevAileron - Aileron) > AileronStep) && !(Math.Abs(_prevElevator - Elevator) > ElevatorStep)))
                 return;
             Aileron = Aileron / 124.0;
             Elevator = Elevator / 124.0;
