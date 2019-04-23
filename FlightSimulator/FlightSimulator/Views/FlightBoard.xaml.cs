@@ -27,28 +27,6 @@ namespace FlightSimulator.Views
     {
         ObservableDataSource<Point> planeLocations = null;
 
-        public new object DataContext
-        {
-            get => base.DataContext;
-            set
-            {
-                INotifyPropertyChanged vm;
-
-                // remove old listener
-                vm = DataContext as INotifyPropertyChanged;
-                if (vm != null)
-                    vm.PropertyChanged -= Vm_PropertyChanged;
-
-                // set new data context
-                base.DataContext = value;
-
-                // add new listener
-                vm = DataContext as INotifyPropertyChanged;
-                if (vm != null)
-                    vm.PropertyChanged += Vm_PropertyChanged;
-            }
-        }
-
         public FlightBoard()
         {
             InitializeComponent();
@@ -61,6 +39,10 @@ namespace FlightSimulator.Views
             planeLocations.SetXYMapping(p => p);
 
             plotter.AddLineGraph(planeLocations, 2, "Route");
+
+            INotifyPropertyChanged vm = DataContext as INotifyPropertyChanged;
+            if (vm != null)
+                vm.PropertyChanged += Vm_PropertyChanged;
         }
 
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)

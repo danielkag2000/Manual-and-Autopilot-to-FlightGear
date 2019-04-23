@@ -58,31 +58,28 @@ namespace Ex2.Model.Server
             if (!IsOpen)
                 throw new InvalidOperationException("Cannot close, server is not opened");
 
-            /* disable running of loop and wait for it to finish */
+            // disable running of loop
             running = false;
-            Thread.Sleep(1000);
 
             // close the client connection and then the server connection
-            client.Close();
-            listener.Stop();
+            client?.Close();
+            listener?.Stop();
         }
 
-        public void Open()
+        private void StartListener()
         {
-            if (IsOpen)
-                throw new InvalidOperationException("Cannot open, server is already opened");
+            // stop old listener if needed
+            if (listener != null && listener.Server.IsBound)
+                listener.Stop();
 
             // start a listener
             IPEndPoint ep = new IPEndPoint(IPAddress.Any, port);
             listener = new TcpListener(ep);
             listener.Start();
+        }
 
-            client = listener.AcceptTcpClient();
-            Console.WriteLine("Client Connected!");
-
-            running = true;
-            IsOpen = true;
-            
+        private void ReadClient(TcpClient client, ref bool running)
+        {
             using (NetworkStream stream = client.GetStream())
             using (BinaryReader reader = new BinaryReader(stream))
             {
@@ -93,14 +90,14 @@ namespace Ex2.Model.Server
                     currentProperty = 0;
                     int ch;
                     string num = "";
-                    
+
                     // read until end of line
                     while ((ch = reader.ReadChar()) != LineSep)
                     {
                         // read until end of current variable
-                        do num += (char) ch;
+                        do num += (char)ch;
                         while ((ch = reader.Read()) != VarSep && ch != LineSep && ch != -1);
-                            
+
 
                         // if actually read a number
                         if (num.Length > 0)
@@ -120,6 +117,28 @@ namespace Ex2.Model.Server
                     PropertyUpdate?.Invoke();
                 }
             }
+        }
+
+        public void Open()
+        {
+            if (IsOpen)
+                throw new InvalidOperationException("Cannot open, server is already opened");
+
+            try
+            {
+                IsOpen = true;
+                // start a listener
+                StartListener();
+
+                client = listener.AcceptTcpClient();
+                Console.WriteLine("Client Connected!");
+
+                running = true;
+                ReadClient(client, ref running);
+            }
+            catch (Exception) { }
+
+            IsOpen = false;
         }
     }
 }

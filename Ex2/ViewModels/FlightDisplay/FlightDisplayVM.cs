@@ -13,7 +13,7 @@ using FlightSimulator.ViewModels;
 
 namespace Ex2.ViewModels.FlightDisplay
 {
-    public class FlightDisplayVM : IFlightDisplayVM, INotifyPropertyChanged
+    public class FlightDisplayVM : IFlightDisplayVM
     {
         private IMainModel MainModel { get; }
         private ISettingsModel SettingsModel { get; }
@@ -27,12 +27,9 @@ namespace Ex2.ViewModels.FlightDisplay
             (connectCmd = new ConnectButtonHandler(MainModel, SettingsModel));
 
         private IFlightBoardVM flightBoardVM;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public IFlightBoardVM FlightBoardVM => flightBoardVM ??
             (flightBoardVM = new FlightBoardVM(MainModel.ServerModel));
-
+        
         public FlightDisplayVM(IMainModel main, ISettingsModel settings)
         {
             MainModel = main;
@@ -40,8 +37,6 @@ namespace Ex2.ViewModels.FlightDisplay
 
             // connect the server and client upon initialization
             ConnectCommand.Execute(null);
-
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FlightBoardVM"));
         }
     }
 

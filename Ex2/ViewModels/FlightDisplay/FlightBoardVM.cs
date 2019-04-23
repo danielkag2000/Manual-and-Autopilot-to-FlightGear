@@ -8,19 +8,22 @@ namespace Ex2.ViewModels.FlightDisplay
     /// An object adapter from
     /// IFlightServer to IFlightBoardVM
     /// </summary>
-    public class FlightBoardVM : IFlightBoardVM
+    public class FlightBoardVM : BaseNotify, IFlightBoardVM
     {
         public double Lon => Server.Lon;
         public double Lat => Server.Lat;
 
-        public event PropertyChangedEventHandler PropertyChanged
-        {
-            add => Server.PropertyChanged += value;
-            remove => Server.PropertyChanged -= value;
-        }
-
         private IFlightServer Server { get; }
         public FlightBoardVM(IFlightServer server)
-            => Server = server;
+        {
+            Server = server;
+            Server.PropertyChanged += OnVariableChange;
+        }
+
+        private void OnVariableChange(object sender, PropertyChangedEventArgs args)
+        {
+            if (args.PropertyName == "Lon" || args.PropertyName == "Lat")
+                NotifyPropertyChanged(args.PropertyName);
+        }
     }
 }

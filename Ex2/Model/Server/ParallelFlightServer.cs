@@ -33,7 +33,8 @@ namespace Ex2.Model.Server
         {
             // close and wait for the server to finish up
             Server.Close();
-            serverTask?.Wait();
+            try { serverTask?.Wait(); }
+            catch (Exception) { }
         }
 
         public void Open()
