@@ -16,7 +16,8 @@ namespace Ex2.Model
 
         public static MainModel Instance =>
             instance ??
-            (instance = new MainModel(new FlightServer(), new FlightClient()));
+            (instance = new MainModel(new ParallelFlightServer(new FlightServer()),
+                new FlightClient()));
         #endregion
 
         //public event PropertyChangedEventHandler PropertyChanged;
