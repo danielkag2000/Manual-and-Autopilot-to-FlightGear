@@ -98,7 +98,7 @@ namespace Ex2.ViewModels
 
         private void OnOKClick()
         {
-            if (String.IsNullOrEmpty(text))
+            if (String.IsNullOrEmpty(text) || !Model.ClientModel.IsOpen)
             {
                 return;
             }
