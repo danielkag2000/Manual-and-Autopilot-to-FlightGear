@@ -15,9 +15,16 @@ namespace Ex2.ViewModels.FlightDisplay
 {
     public class FlightDisplayVM : IFlightDisplayVM
     {
+        // models
         private IMainModel MainModel { get; }
         private ISettingsModel SettingsModel { get; }
 
+        // viewmodel for the flightboard view (Lon\Lat view)
+        private IFlightBoardVM flightBoardVM;
+        public IFlightBoardVM FlightBoardVM => flightBoardVM ??
+            (flightBoardVM = new FlightBoardVM(MainModel.ServerModel));
+
+        /* button commands */
         private ICommand settingsCmd;
         public ICommand SettingsCommand => settingsCmd ??
             (settingsCmd = new SettingsButtonHandler());
@@ -26,10 +33,11 @@ namespace Ex2.ViewModels.FlightDisplay
         public ICommand ConnectCommand => connectCmd ??
             (connectCmd = new ConnectButtonHandler(MainModel, SettingsModel));
 
-        private IFlightBoardVM flightBoardVM;
-        public IFlightBoardVM FlightBoardVM => flightBoardVM ??
-            (flightBoardVM = new FlightBoardVM(MainModel.ServerModel));
-        
+        // the disconnect command just uses the 'CloseOpenConnections' method of MainModel
+        private ICommand disconnectCmd;
+        public ICommand DisconnectCommand => disconnectCmd ??
+            (disconnectCmd = new CommandHandler(() => MainModel.CloseOpenConnections()));
+
         public FlightDisplayVM(IMainModel main, ISettingsModel settings)
         {
             MainModel = main;
@@ -39,5 +47,4 @@ namespace Ex2.ViewModels.FlightDisplay
             ConnectCommand.Execute(null);
         }
     }
-
 }

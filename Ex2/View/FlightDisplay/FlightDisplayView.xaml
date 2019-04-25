@@ -25,6 +25,7 @@
             </WrapPanel.Resources>
 
             <Button Command="{Binding ConnectCommand}">Connect</Button>
+            <Button Command="{Binding DisconnectCommand}">Disconnect</Button>
             <Button Command="{Binding SettingsCommand}">Settings</Button>
         </WrapPanel>
 
