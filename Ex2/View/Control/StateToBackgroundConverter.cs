@@ -9,6 +9,9 @@ using System.Windows.Media;
 
 namespace Ex2.View
 {
+    /// <summary>
+    /// the converter from state to background
+    /// </summary>
     class StateToBackgroundConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
