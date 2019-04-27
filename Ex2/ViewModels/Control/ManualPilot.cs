@@ -15,10 +15,16 @@ namespace Ex2.ViewModels
     public class ManualPilotVM : BaseNotify
     {
 
+        /// <summary>
+        /// the model
+        /// </summary>
         private IMainModel Model;
         public ManualPilotVM()
-            => Model = MainModel.Instance;   
+            => Model = MainModel.Instance;
 
+        /// <summary>
+        /// the Aileron Value
+        /// </summary>
         private double aileronValue = 0;
         public double AileronValue
         {
@@ -31,6 +37,9 @@ namespace Ex2.ViewModels
             }
         }
 
+        /// <summary>
+        /// the Elevator Value
+        /// </summary>
         private double elevatorValue = 0;
         public double ElevatorValue
         {
@@ -43,6 +52,9 @@ namespace Ex2.ViewModels
             }
         }
 
+        /// <summary>
+        /// the Rudder Value
+        /// </summary>
         private double rudderValue = 0;
         public double RudderValue
         {
@@ -55,8 +67,10 @@ namespace Ex2.ViewModels
             }
         }
 
+        /// <summary>
+        /// the Throttle Value
+        /// </summary>
         private double throttleValue = 0;
-
         public double ThrottleValue
         {
             get { return NiceRound(throttleValue); }
@@ -68,6 +82,11 @@ namespace Ex2.ViewModels
             }
         }
 
+        /// <summary>
+        /// send the property with its value to the model
+        /// </summary>
+        /// <param name="path">the path in the flight simulator</param>
+        /// <param name="value">the value to send</param>
         private void SetProperty(string path, double value)
         {
             if (Model.ClientModel.IsOpen)
@@ -76,6 +95,9 @@ namespace Ex2.ViewModels
             }
         }
 
+        /// <summary>
+        /// the Joystick Values Listener
+        /// </summary>
         public JoystickValues ValuesListener
         {
             set
@@ -88,6 +110,11 @@ namespace Ex2.ViewModels
             }
         }
 
+        /// <summary>
+        /// do a nice round to the number
+        /// </summary>
+        /// <param name="d">the number to round</param>
+        /// <returns>a nice round of the number</returns>
         private double NiceRound(double d) => Math.Round(d * 100) / 100;
     }
 }
