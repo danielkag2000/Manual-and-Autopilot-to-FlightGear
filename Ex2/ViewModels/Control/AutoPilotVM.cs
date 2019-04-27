@@ -132,9 +132,6 @@ namespace Ex2.ViewModels
                 return;
             }
 
-            // change the state to sending
-            CurState = State.SENDING;
-
             // sperate by lines
             List<string> commands = TextCommand.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).ToList<string>();
 
@@ -144,9 +141,12 @@ namespace Ex2.ViewModels
 
                 foreach (string cmd in commands)
                 {
-                        Model.ClientModel.SendLine(cmd);
-                        Thread.Sleep(2000);
+                    Model.ClientModel.SendLine(cmd);
+                    Thread.Sleep(2000);
                 }
+
+                // change the state to sending
+                CurState = State.SENDING;
             });
             task.Start();
         }
