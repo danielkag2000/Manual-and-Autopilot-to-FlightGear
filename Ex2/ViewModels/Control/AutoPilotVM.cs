@@ -102,9 +102,10 @@ namespace Ex2.ViewModels
             {
                 return;
             }
-            string before = TextCommand;
-            List<string> commands = TextCommand.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).ToList<string>();
 
+            CurState = State.SENDING;
+
+            List<string> commands = TextCommand.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None).ToList<string>();
             Task task = new Task(delegate ()
             {
 
@@ -112,10 +113,6 @@ namespace Ex2.ViewModels
                 {
                         Model.ClientModel.SendLine(cmd);
                         Thread.Sleep(2000);
-                }
-                if (TextCommand.Equals(before))
-                {
-                    CurState = State.SENDING;
                 }
             });
             task.Start();
